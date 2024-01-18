@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/post")
 @RestController
 public class PostRestController {
-	
+
 	@Autowired
 	private PostBO postBO;
 	
@@ -32,15 +32,13 @@ public class PostRestController {
 		int userId = (int)session.getAttribute("userId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
 		
-		// DB INSERT
-		postBO.addPost(userId, subject, content);
+		// DB Insert
+		postBO.addPost(userId, userLoginId, subject, content, file);
 		
 		// 응답값
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
 		result.put("result", "성공");
 		return result;
-		
 	}
-	
 }

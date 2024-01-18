@@ -24,18 +24,23 @@ public class PostBO {
 		return postMapper.selectPostListByUserId(userId);
 	}
 	
-	// input : params   output : x
-	public void addPost(int userId, String userLoginId, String subject, String content, MultipartFile file) {
+	// input: params     output: X
+	public void addPost(int userId, String userLoginId, 
+			String subject, String content, MultipartFile file) {
 		
 		String imagePath = null;
 		
 		// 업로드할 이미지가 있을 때 업로드
 		if (file != null) {
-			imagePath = fileManagerService.saveFile(userLoginId, null);
+			imagePath = fileManagerService.saveFile(userLoginId, file);
 		}
 		
-		
-		// postMapper.insertPost(userId, subject, content, imagePath);
+		postMapper.insertPost(userId, subject, content, imagePath);
+	}
+	
+	// input : 글번호, userId  output : Post
+	public Post getPostByPostIdAndUserId (int postId, int userId){
+		return postMapper.selectPostByPostIdAndUserId(postId, userId);
 	}
 	
 }
