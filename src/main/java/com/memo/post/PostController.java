@@ -56,17 +56,10 @@ public class PostController {
 		
 		int userId = (int)session.getAttribute("userId");
 		// DB 조회 - postId + userId
-		Post post = postBO.getPostByPostIdAndUserId(postId, userId);
+		Post post = postBO.getPostByPostIdUserId(postId, userId);
 		
 		model.addAttribute("post", post);
-		
 		model.addAttribute("viewName", "post/postDetail");
 		return "template/layout";
-		
 	}
-	
-	
-	
-	
-	
 }
